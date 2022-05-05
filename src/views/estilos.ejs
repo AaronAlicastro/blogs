@@ -1,0 +1,38 @@
+<style>
+    *{ margin: 0; padding: 0; }
+    #cabecera{
+        display: flex; flex-flow: row wrap; justify-content: space-around;
+        margin: 20px; border-bottom: 1px solid #aaa;
+    }#cacabecera h1{
+        display: inline-block; padding: 15px;
+    }#cabecera div{
+        display: inline block; margin-top: 15px;
+    }#cabecera div a{
+        font-size: 20px; margin: 15px; text-decoration: none;
+    }
+    /*––––––––––––––––––––––– los blogs ––––––––––––––––––––––––––––*/
+    .cartillaBlog{
+        display: flex; flex-flow: column wrap; justify-content: space-evenly;
+        background: #eef; width: 350px; height: 500px; border-radius: 12px;
+        margin: 25px; box-shadow: 4px 1px 2px 2px #eff; display: inline-block;
+    }.cartillaBlog h1{
+        text-align: center;
+    }.cartillaBlog div{
+        width: 100%; flex-grow: 50;
+    }.cartillaBlog div:nth-child(1){
+        display: flex; flex-flow: row wrap; justify-content: center;
+        box-sizing: border-box; padding: 15px;
+    }.cartillaBlog div:nth-child(1) img{
+        width: 70%; height: 80%; object-fit: contain;
+    }.cartillaBlog div:nth-child(3){
+        flex-grow: 15; padding: 15px; box-sizing: border-box;
+    }.cartillaBlog div:nth-child(4){
+        display: flex; flex-flow: row wrap; justify-content: center;
+        box-sizing: border-box; flex-grow: 1;
+    }.cartillaBlog div:nth-child(4) button{
+        width: 80px; height: 50px; margin: 20px; color: #fff;
+        opacity: .5; background: #225; border: none; border-radius: 10px;
+    }.cartillaBlog div:nth-child(4) button:hover{
+        transform: scale(1.1,1.1); cursor: pointer;
+    }
+</style>
