@@ -24,7 +24,7 @@ app.get("/verMas",(req,res)=>{
     res.render('verMas', { } );
 });
 app.get("/home",(req,res)=>{
-    res.render('home', { saludo:"hola" } );
+    res.render('blogs', { saludo:"hola" } );
 });
 
 app.get('/editar', async function(req,res){
