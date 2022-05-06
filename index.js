@@ -21,4 +21,13 @@ app.get("/home",(req,res)=>{
     res.render('index', { saludo:"hola" } );
 });
 
+
+app.put("/editar/:id_editar", async (req, res) => {
+    var id = req.params.id_editar;
+    res.render('index');
+});
+
+app.get("/editar",(req,res)=>{
+    res.render('editar');
+})
 app.listen(2000);
