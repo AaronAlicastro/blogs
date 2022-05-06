@@ -1,16 +1,18 @@
 <%- include("cabecera.ejs") %>
-    <form id="editarF" style="margin-left: 300px;">
-        <input type="text" placeholder="Titulo">
-        <br>
-        <input type="text" placeholder="Pegue su URL">
-        <br>
-        <textarea name="contenido" id="contenido" cols="40" rows="15"></textarea>
-        <br>
-        <button>Guardar</button>
-    </form>
 
+    <form id="editarF" style="width: 70%; margin: auto; text-align: center;">
+        <div class="text-center mt-5">
+
+            <input class="form-control" type="text" placeholder="Titulo">
+            <br>
+            <input class="form-control" type="text" placeholder="Pegue su URL">
+            <br>
+            <textarea class="form-control" name="contenido" id="contenido" cols="40" rows="15"></textarea>
+            <br>
+            <button class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <%- include("piePagina.ejs") %>
-
-        
