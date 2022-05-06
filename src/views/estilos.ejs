@@ -10,6 +10,55 @@
     }#cabecera div a{
         font-size: 20px; margin: 15px; text-decoration: none;
     }
+    /*pestana ver mas ––––––––––––––––––––––––––––––––––––––––––––––*/
+    #titleBlog{
+        text-align: center;
+    }#containerTitleBlog{
+        display: flex; flex-flow: row wrap; justify-content: space-around;
+    }#containerTitleBlog h1{
+        display: inline-block; flex-grow: 100; text-align: center;
+    }#containerTitleBlog div{
+        display: flex; flex-flow: row wrap; justify-content: center;
+        flex-grow: 20; padding: 20px; box-sizing: border-box; height: fit-content;
+    }#containerTitleBlog div img{
+        width: 50px; height: 50px;
+    }#containerTitleBlog div img:hover{
+        cursor: pointer;
+    }#descripcionBlogView{
+        padding: 50px 25px; font-family: Times New Roman;
+        width: 100%; min-height: 250px; font-size: 20px; box-sizing: border-box;
+    }#descripcionBlogView img{
+        float: right; width: 200px; height: 200px;
+        border-radius: 12px; margin: 20px;
+    }#containerComentarios h2{
+        margin: 20px 20px;
+    }.coment{
+        padding: 25px; border-radius: 12px; height: fit-content; 
+        box-shadow: 4px 4px 2px 2px #eef;
+        display: flex; flex-flow: row wrap; margin: 25px; box-sizing: content-box;
+    }.coment h3{
+        display: inline-block; width: 200px; height: 50px; text-align: center;
+    }.coment textarea{
+        resize: none; margin-left: 15px; box-sizing: content-box; background: none;
+        flex-grow: 100; height: 120px; border: none; font-size: 18px;
+        border-style: none; outline: none;
+    }#containerComentarios h3{
+        margin: 20px 20px;
+    }#formComentario{
+        display: flex; flex-flow: row wrap; padding: 20px;
+    }.formComentario_opciones{ margin-left: 10px; border-radius: 10px;
+        border: none; border-style: none; outline: none;
+        box-shadow: 4px 4px 2px 2px #eef;
+    }
+    .centarOpciones input{
+        height: 50px;
+    }#formComentario textarea{
+        flex-grow: 100; resize: none; padding: 15px; height: 120px;
+    }.centarOpciones button{
+        padding: 20px 10px;
+    }.centarOpciones{
+        display: flex; flex-flow: column wrap; justify-content: center; margin-left: 40px;
+    }
     /*––––––––––––––––––––––– los blogs ––––––––––––––––––––––––––––*/
     .cartillaBlog{
         display: flex; flex-flow: column wrap; justify-content: space-evenly;

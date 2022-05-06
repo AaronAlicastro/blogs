@@ -17,8 +17,12 @@ mongoose.connect(
 });
 
 
-app.get("/home",(req,res)=>{
-    res.render('index', { saludo:"hola" } );
+app.get("/blogs",(req,res)=>{
+    res.render('index', { } );
+});
+
+app.get("/verMas",(req,res)=>{
+    res.render('verMas', { } );
 });
 
 app.listen(2000);
