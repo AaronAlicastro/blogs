@@ -16,9 +16,24 @@ mongoose.connect(
     console.log("Ha ocurrido un error");
 });
 
-
-app.get("/home",(req,res)=>{
-    res.render('index', { saludo:"hola" } );
+app.get("/blogs",(req,res)=>{
+    res.render('blogs', { saludo:"hola" } );
 });
 
-app.listen(2000);
+app.get("/home",(req,res)=>{
+    res.render('home', { saludo:"hola" } );
+});
+
+app.get('/editar', async function(req,res){
+    res.render('editar', { objeto: "vacío"});
+
+});
+
+app.get('/crear', async function(req,res){
+    res.render('crear', { objeto: "vacío"});
+
+});
+
+app.listen(2000, function(){
+    console.log("Servidor abierto en puerto 2000");
+});
