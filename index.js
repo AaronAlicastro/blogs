@@ -45,9 +45,6 @@ app.post('/guardar', async function(req,res){
      await doc.save();
      console.log(doc);
      res.send(doc);
-     
-
-
 
 });
 
