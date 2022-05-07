@@ -3,19 +3,35 @@
     <form id="editarF" style="width: 70%; margin: auto; text-align: center;">
         <div class="text-center mt-5">
 
-            <input class="form-control" type="text" placeholder="Titulo">
+            <input class="form-control" type="text" placeholder="Titulo" name="inpTitulo">
             <br>
-            <input class="form-control" type="text" placeholder="Pegue su URL">
+            <input class="form-control" type="text" placeholder="Pegue su URL" name="inpUrl">
             <br>
             <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="10"></textarea>
             <br>
-            <button class="btn btn-primary">Guardar</button>
+            <button class="btn btn-primary" name="btnGuardar" id="btGuardar">Guardar</button>
         </div>
     </form>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $("#btGuardar").click((e) => {
+                e.preventDefault();
+                var editarBlog = $("#editarF").serialize();
+                $.ajax({
+                    url: '/editar',
+                    type: 'get',
+                    data: { datosEditar: editarBlog },
+                    success: (respuesta) => {
+                        console.log(respuesta);
+                    }
+                });
 
+            });
 
-    
+        });
+
+    </script>
 
     <%- include("piePagina.ejs") %>
