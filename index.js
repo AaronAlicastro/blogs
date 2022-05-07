@@ -27,11 +27,6 @@ app.get("/verMas",(req,res)=>{
     res.render('verMas', { } );
 });
 
-app.post('/editar', function(req,res){
-    res.render('editar');
-
-});
-
 app.get('/crear', async function(req,res){
    
     
@@ -48,8 +43,15 @@ app.post('/guardar', async function(req,res){
 
 });
 
-app.get("/editar/:id",(req,res)=>{
+app.get("/editar/:id",async (req,res)=>{
     res.render('editar');
+    var id = req.params.id;
+    var datosEditar = await SkemaBlogs.findById(id);
+    datosEditar.titulo = req.body.titulo;
+    datosEditar.url_imagen = req.body.url_imagen;
+    datosEditar.descripcion = req.body.descripcion;
+    res.render('blogs')
+    console.log(datosEditar)
 });
 
 app.listen(2000);
