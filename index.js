@@ -33,7 +33,22 @@ app.post('/editar', function(req,res){
 });
 
 app.get('/crear', async function(req,res){
-    res.render('crear', { objeto: "vacío"});
+   
+    
+    res.render('crear', {});
+});
+
+app.post('/guardar', async function(req,res){
+
+     var datos = req.body;
+     var doc = new SkemaBlogs(datos);
+     await doc.save();
+     console.log(doc);
+     res.send(doc);
+     
+
+
+
 });
 
 app.get("/editar/:id",(req,res)=>{

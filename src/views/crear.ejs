@@ -1,25 +1,50 @@
 <%- include("cabecera.ejs") %>
 <div class="container">
     <div class="text-center mt-5">
-<form>
+<form id="formCrear">
     <h1>Subir Blog</h1>
     <div class="form-outline mb-4">
-      <input type="text" id="form5Example1" class="form-control" />
+      <input type="text" id="form5Example1" class="form-control" placeholder="Ingrese título" name="titulo"/>
       <label class="form-label" for="form5Example1">Tìtulo</label>
     </div>
     
     <div class="form-outline mb-4">
-      <input type="email" id="form5Example2" class="form-control" />
+      <input type="email" id="form5Example2" class="form-control" placeholder="Ingrese url de nueva imagen" name="url_imagen"/>
       <label class="form-label" for="form5Example2">Nueva imagen</label>
     </div>
 
     <div class="form-outline mb-4">
-        <textarea type="email" id="form5Example2" class="form-control"></textarea>
+        <textarea type="email" id="form5Example2" class="form-control" placeholder="Ingrese descripción de blog" name="descripcion"></textarea>
         <label class="form-label" for="form5Example2">Descripción</label>
       </div>
   
-    <button type="submit" class="btn btn-primary btn-block mb-4">Subir entrada</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4" name="nuevoBlog" id="crearBlog">Subir entrada</button>
   </form>
+
+  <script>
+    $(document).ready(function(){
+
+      $('#crearBlog').click(function(e){
+        e.preventDefault();
+
+        var datos = $('#formCrear').serialize();
+
+        $.ajax({
+
+          url:'/guardar',
+          type: 'POST',
+          data: datos,
+          success: function(respuesta){
+            console.log(respuesta);
+            $("#formCrear").trigger("reset");
+          }
+
+        });
+      })
+
+
+    });
+  </script>
 </div>
 </div>
 <%- include("piePagina.ejs") %>
