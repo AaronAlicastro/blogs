@@ -17,15 +17,22 @@
             </div>
             <h1 id="titulo"><%=blogs[i].titulo%></h1>
             <div>
-                <h4 id="descripcion"><%=blogs[i].descripcion%></h4>
+                <h4 id="descripcion" class="descripcion_blogs"><%=blogs[i].descripcion%></h4>
             </div>
             <div>
-                <a href="/editar/<%=id_blog%>"><button type="submit" id="editar" name="btnEditar">Editar</button></a>
-                
-                <button>Ver m&aacutes</button>
+                <a href="/editar/<%=blogs[i]._id%>"><button type="submit" id="editar" name="btnEditar">Editar</button></a>
+                <a href="/vermas/<%=blogs[i]._id%>"> <button>Ver m&aacutes</button> </a>
             </div>
         </div>
 
         <% } %>
 
+        <script>
+            let todos = document.querySelectorAll(".descripcion_blogs");
+            todos.forEach(ele=>{
+                let des = ele.innerHTML;
+                des = des.substring(0,25)+"...";
+                ele.innerHTML = des;
+            });
+        </script>
             <%- include("piePagina.ejs") %>

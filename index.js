@@ -18,13 +18,23 @@ mongoose.connect(
 
 const SkemaBlogs = require("./src/models/Blogs");
 
-app.get("/blogs",(req,res)=>{
-    var datos_blogs = SkemaBlogs.find();
-    res.render('blogs', {blogs : datos_blogs});
+app.get("/blogs", async (req,res)=>{
+    let datos_blogs = await SkemaBlogs.find();
+    res.render('blogs', {blogs: datos_blogs});
 });
 
-app.get("/verMas",(req,res)=>{
-    res.render('verMas', { } );
+app.get("/verMas/:id", async (req,res)=>{
+    let blog_data = await SkemaBlogs.findById(req.params.id);
+    res.render('verMas', { blogs: blog_data } );
+});
+app.post("/anadirComentario/:id", async (req,res)=>{
+    let blog_data = await SkemaBlogs.findById(req.params.id);
+    blog_data.commentBlog.comments.push({
+        userName: req.body.nameUsuario,
+        comentario: req.body.comentario
+    })
+    await blog_data.save();
+    res.redirect("/verMas/"+req.params.id);
 });
 
 app.post('/editar', function(req,res){
@@ -33,22 +43,15 @@ app.post('/editar', function(req,res){
 });
 
 app.get('/crear', async function(req,res){
-   
-    
     res.render('crear', {});
 });
 
 app.post('/guardar', async function(req,res){
-
-     var datos = req.body;
-     var doc = new SkemaBlogs(datos);
-     await doc.save();
-     console.log(doc);
-     res.send(doc);
-     
-
-
-
+    let blog = req.body;
+    blog.fecha = new Date();
+    var doc = new SkemaBlogs(blog);
+    await doc.save();
+    res.send("lesto");
 });
 
 app.get("/editar/:id",(req,res)=>{

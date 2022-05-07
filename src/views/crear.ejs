@@ -20,31 +20,28 @@
   
     <button type="submit" class="btn btn-primary btn-block mb-4" name="nuevoBlog" id="crearBlog">Subir entrada</button>
   </form>
+</div>
+</div>
 
   <script>
     $(document).ready(function(){
-
+    
       $('#crearBlog').click(function(e){
         e.preventDefault();
-
         var datos = $('#formCrear').serialize();
-
+      
         $.ajax({
-
           url:'/guardar',
           type: 'POST',
           data: datos,
           success: function(respuesta){
-            console.log(respuesta);
             $("#formCrear").trigger("reset");
           }
-
+        
         });
       })
-
-
+    
+    
     });
   </script>
-</div>
-</div>
 <%- include("piePagina.ejs") %>
