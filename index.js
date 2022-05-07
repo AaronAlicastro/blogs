@@ -16,6 +16,8 @@ mongoose.connect(
     console.log("Ha ocurrido un error");
 });
 
+const SkemaBlogs = require("./src/models/Blogs");
+
 app.get("/blogs",(req,res)=>{
     res.render('blogs', { saludo:"hola" } );
 });
@@ -23,12 +25,15 @@ app.get("/blogs",(req,res)=>{
 app.get("/verMas",(req,res)=>{
     res.render('verMas', { } );
 });
-app.get("/home",(req,res)=>{
-    res.render('blogs', { saludo:"hola" } );
+app.get("/home", async (req,res)=>{
+    var datos_blogs = SkemaBlogs.find();
+    
+    res.render('blogs', {blogs : datos_blogs});
+
 });
 
-app.get('/editar', async function(req,res){
-    res.render('editar', { objeto: "vacío"});
+app.post('/editar', function(req,res){
+    res.render('editar');
 
 });
 
@@ -36,13 +41,8 @@ app.get('/crear', async function(req,res){
     res.render('crear', { objeto: "vacío"});
 });
 
-
-app.put("/editar/:id_editar", async (req, res) => {
-    var id = req.params.id_editar;
-    res.render('index');
+app.get("/editar/:id",(req,res)=>{
+    res.render('editar');
 });
 
-app.get("/editar",(req,res)=>{
-    res.render('editar');
-})
 app.listen(2000);
