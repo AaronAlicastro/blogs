@@ -16,11 +16,20 @@
             $("#btGuardar").click((e) => {
                 e.preventDefault();
                 $.ajax({
+<<<<<<< HEAD
                     url: '/guardarEdicion/<%=blogs._id%>',
                     type: 'post',
                     data: $("#editarF").serialize(),
                     success: (respuesta) => {
                         location.assign(respuesta);
+=======
+                    url: '/editar',
+                    type: 'PUT',
+                    data: { datosEditar: editarBlog },
+                    success: (respuesta) => {
+                        
+                        alert("se edito" + respuesta)
+>>>>>>> 4d4ea3203eebc108196a78c2504e9da3f4f41cec
                     }
                 });
             });
