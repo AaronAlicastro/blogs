@@ -8,10 +8,15 @@ var blog = new Schema ({
     fecha: Date,
     commentBlog: {
         comments: [
-            /*userName {},
-            comentario {},*/
+            /*
+            userName {},
+            comentario {},
+            */
         ],
-        default: []
+        cantidadLikes: {
+            type: Number,
+            default: 0
+        }
     }
 });
 

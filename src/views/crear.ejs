@@ -9,7 +9,7 @@
     </div>
     
     <div class="form-outline mb-4">
-      <input type="email" id="form5Example2" class="form-control" placeholder="Ingrese url de nueva imagen" name="url_imagen"/>
+      <input type="email" id="urlImage" class="form-control" placeholder="Ingrese url de nueva imagen" name="url_imagen"/>
       <label class="form-label" for="form5Example2">Nueva imagen</label>
     </div>
 
@@ -25,23 +25,19 @@
 
   <script>
     $(document).ready(function(){
-    
       $('#crearBlog').click(function(e){
         e.preventDefault();
-        var datos = $('#formCrear').serialize();
-      
         $.ajax({
           url:'/guardar',
           type: 'POST',
-          data: datos,
+          data: $('#formCrear').serialize(),
           success: function(respuesta){
+            alert(respuesta);
             $("#formCrear").trigger("reset");
           }
-        
         });
       })
-    
-    
     });
   </script>
-<%- include("piePagina.ejs") %>
+</body>
+</html>

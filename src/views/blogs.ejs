@@ -1,4 +1,8 @@
 <%- include("cabecera.ejs") %>
+    <div id="containerBuscar" class="input-group rounded">
+        <input type="search" class="form-control rounded" placeholder="Type to filter" aria-label="Search" aria-describedby="search-addon" />
+        <button id="botonFiltro" class="input-group-text border-0">Bucar</button>
+    </div>
 
     <div class="container-fluid">
         <div class="container">
@@ -6,14 +10,12 @@
                 <h1>Bienvenido a Tus Blogs ;)</h1>
             </div>
         </div>
-
     </div>
 
     <% for(let i=0; i < blogs.length; i++){ %>
-
         <div class="cartillaBlog">
             <div>
-                <img src="<%=blogs[i].url_imagen%>" alt="">
+                <img src="<%=blogs[i].url_imagen%>" alt="not found">
             </div>
             <h1 id="titulo"><%=blogs[i].titulo%></h1>
             <div>
@@ -24,15 +26,14 @@
                 <a href="/vermas/<%=blogs[i]._id%>"> <button>Ver m&aacutes</button> </a>
             </div>
         </div>
+    <% } %>
 
-        <% } %>
-
-        <script>
-            let todos = document.querySelectorAll(".descripcion_blogs");
-            todos.forEach(ele=>{
-                let des = ele.innerHTML;
-                des = des.substring(0,25)+"...";
-                ele.innerHTML = des;
-            });
-        </script>
-            <%- include("piePagina.ejs") %>
+    <script>
+        let todos = document.querySelectorAll(".descripcion_blogs");
+        todos.forEach(ele=>{
+            let des = ele.innerHTML;
+            des = des.substring(0,35)+"...";
+            ele.innerHTML = des;
+        });
+    </script>
+<%- include("piePagina.ejs") %>

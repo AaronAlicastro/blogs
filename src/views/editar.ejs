@@ -1,37 +1,30 @@
 <%- include("cabecera.ejs") %>
-
     <form id="editarF" style="width: 70%; margin: auto; text-align: center;">
         <div class="text-center mt-5">
-
-            <input class="form-control" type="text" placeholder="Titulo" name="inpTitulo">
+            <input class="form-control" type="text" placeholder="Titulo" name="inpTitulo" value="<%=blogs.titulo%>">
             <br>
-            <input class="form-control" type="text" placeholder="Pegue su URL" name="inpUrl">
+            <input class="form-control" type="text" placeholder="Pegue su URL" name="inpUrl" value="<%=blogs.url_imagen%>">
             <br>
-            <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="10"></textarea>
+            <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="10" placeholder="descripcion"><%=blogs.descripcion%></textarea>
             <br>
             <button class="btn btn-primary" name="btnGuardar" id="btGuardar">Guardar</button>
         </div>
     </form>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(() => {
             $("#btGuardar").click((e) => {
                 e.preventDefault();
-                var editarBlog = $("#editarF").serialize();
                 $.ajax({
-                    url: '/editar',
-                    type: 'get',
-                    data: { datosEditar: editarBlog },
+                    url: '/guardarEdicion/<%=blogs._id%>',
+                    type: 'post',
+                    data: $("#editarF").serialize(),
                     success: (respuesta) => {
-                        console.log(respuesta);
+                        location.assign(respuesta);
                     }
                 });
-
             });
-
         });
-
     </script>
-
-    <%- include("piePagina.ejs") %>
+</body>
+</html>

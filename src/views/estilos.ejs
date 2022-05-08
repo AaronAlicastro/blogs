@@ -11,7 +11,13 @@
         font-size: 20px; margin: 15px; text-decoration: none;
     }#containerCabecera{
         margin-bottom: 30px;
-    }
+    }#containerBuscar{ width: 70%; margin: auto; }
+    #containerBuscar button{ background: #000; color: #fff; }
+    #containerBuscar input{ border: 1px solid #115; }
+    #footer{
+        font-size: 25px; text-align: center; padding: 15px;
+    }#footer a{ text-decoration: none; color: #000; }
+    #footer a:hover{ color: #aae; }
     /*pestana ver mas ––––––––––––––––––––––––––––––––––––––––––––––*/
     #titleBlog{
         text-align: center;
@@ -20,10 +26,10 @@
     }#containerTitleBlog h1{
         display: inline-block; flex-grow: 100; text-align: center;
     }#containerTitleBlog div{
-        display: flex; flex-flow: row wrap; justify-content: center;
+        display: flex; flex-flow: row wrap; justify-content: center; font-size: 40px;
         flex-grow: 20; padding: 20px; box-sizing: border-box; height: fit-content;
     }#containerTitleBlog div img{
-        width: 50px; height: 50px;
+        width: 50px; height: 50px; margin-left: 15px;
     }#containerTitleBlog div img:hover{
         cursor: pointer;
     }#descripcionBlogView{
@@ -67,14 +73,16 @@
         background: #eef; width: 350px; height: 500px; border-radius: 12px;
         margin: 25px; box-shadow: 4px 1px 2px 2px #eff; display: inline-block;
     }.cartillaBlog h1{
-        text-align: center;
+        text-align: center; font-size: 25px;
+    }#descripcion{
+        font-size: 15px;
     }.cartillaBlog div{
         width: 100%; flex-grow: 50;
+    }.cartillaBlog div img{
+        width: 70%; height: 200px; object-fit: contain;
     }.cartillaBlog div:nth-child(1){
         display: flex; flex-flow: row wrap; justify-content: center;
         box-sizing: border-box; padding: 15px;
-    }.cartillaBlog div:nth-child(1) img{
-        width: 70%; height: 80%; object-fit: contain;
     }.cartillaBlog div:nth-child(3){
         flex-grow: 15; padding: 15px; box-sizing: border-box;
     }.cartillaBlog div:nth-child(4){
@@ -89,5 +97,9 @@
     /* Estilos de blogs.ejs */
     .padder{
         margin-top: 70px;
+    }#editarF textarea{
+        resize: none;
+    }#form5Example2{
+        resize: none; height: 30vh;
     }
 </style>

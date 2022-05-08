@@ -1,5 +1,5 @@
 const express = require("express");
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const app = express();
@@ -36,6 +36,12 @@ app.post("/anadirComentario/:id", async (req,res)=>{
     await blog_data.save();
     res.redirect("/verMas/"+req.params.id);
 });
+app.post("/aumentarLike/:id", async (req,res)=>{
+    let blog_data = await SkemaBlogs.findById(req.params.id);
+    blog_data.commentBlog.cantidadLikes += 1;
+    await blog_data.save();
+    res.end("lesto");
+});
 
 app.get('/crear', async function(req,res){
     res.render('crear', {});
@@ -44,20 +50,22 @@ app.get('/crear', async function(req,res){
 app.post('/guardar', async function(req,res){
     let blog = req.body;
     blog.fecha = new Date();
-    var doc = new SkemaBlogs(blog);
+    let doc = new SkemaBlogs(blog);
     await doc.save();
-    res.send("lesto");
+    res.end("Se ha creado el blog correctamente");
 });
 
 app.get("/editar/:id",async (req,res)=>{
-    res.render('editar');
-    var id = req.params.id;
-    var datosEditar = await SkemaBlogs.findById(id);
-    datosEditar.titulo = req.body.titulo;
-    datosEditar.url_imagen = req.body.url_imagen;
-    datosEditar.descripcion = req.body.descripcion;
-    res.render('blogs')
-    console.log(datosEditar)
+    let datosEditar = await SkemaBlogs.findById(req.params.id);
+    res.render('editar', { blogs: datosEditar });
+});
+app.post("/guardarEdicion/:id", async (req,res)=>{
+    let datosEditar = await SkemaBlogs.findById(req.params.id);
+    datosEditar.titulo = req.body.inpTitulo;
+    datosEditar.url_imagen = req.body.inpUrl;
+    datosEditar.descripcion = req.body.contenido;
+    await datosEditar.save();
+    res.end("/blogs");
 });
 
 app.listen(2000);
