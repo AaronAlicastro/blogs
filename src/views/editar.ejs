@@ -21,10 +21,11 @@
                 var editarBlog = $("#editarF").serialize();
                 $.ajax({
                     url: '/editar',
-                    type: 'get',
+                    type: 'PUT',
                     data: { datosEditar: editarBlog },
                     success: (respuesta) => {
-                        console.log(respuesta);
+                        
+                        alert("se edito" + respuesta)
                     }
                 });
 
