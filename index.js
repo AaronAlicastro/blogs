@@ -52,7 +52,6 @@ app.post('/guardar', async function (req, res) {
     blog.fecha = new Date();
     let doc = new SkemaBlogs(blog);
     await doc.save();
-<<<<<<< HEAD
     res.end("Se ha creado el blog correctamente");
 });
 
@@ -67,27 +66,6 @@ app.post("/guardarEdicion/:id", async (req,res)=>{
     datosEditar.descripcion = req.body.contenido;
     await datosEditar.save();
     res.end("/blogs");
-=======
-    res.send("blogs");
 });
 
-app.get("/editar/:id", async (req, res) => {
-    res.render('editar');
-    var id = req.params.id;
-    
->>>>>>> 4d4ea3203eebc108196a78c2504e9da3f4f41cec
-});
-
-app.put('/editar', (req,res)=>{
-    var editados = req.body;
-//var datosEditar = await SkemaBlogs.find(id);
-    console.log(editados)
-
-    // datosEditar.titulo = req.body.titulo;
-    // datosEditar.url_imagen = req.body.url_imagen;
-    // datosEditar.descripcion = req.body.descripcion;
-    // var editados = new SkemaBlogs(datosEditar)
-    // await editados.save();
-    // console.log(editados)
-})
 app.listen(2000);
