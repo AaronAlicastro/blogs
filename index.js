@@ -23,6 +23,21 @@ app.get("/blogs", async (req, res) => {
     res.render('blogs', { blogs: datos_blogs });
 });
 
+app.get("/blogs/:isFiltro", async (req, res) => {
+    let filtro = req.params.isFiltro + "";
+    console.log(req.params.fecha)
+    //let posibleFecha = obterPosibleFecha(req.body.fecha)
+    let blog_data = await SkemaBlogs.find({
+        $or: [
+            { titulo: { $regex: filtro } },
+            { descripcion: { $regex: filtro } },
+            { url_imagen: filtro },
+            //{fecha:posibleFecha}
+        ]
+    });
+    res.render('blogs', { blogs: blog_data });
+});
+
 app.get("/verMas/:id", async (req, res) => {
     let blog_data = await SkemaBlogs.findById(req.params.id);
     res.render('verMas', { blogs: blog_data });
@@ -36,7 +51,7 @@ app.post("/anadirComentario/:id", async (req, res) => {
     await blog_data.save();
     res.redirect("/verMas/" + req.params.id);
 });
-app.post("/aumentarLike/:id", async (req,res)=>{
+app.post("/aumentarLike/:id", async (req, res) => {
     let blog_data = await SkemaBlogs.findById(req.params.id);
     blog_data.commentBlog.cantidadLikes += 1;
     await blog_data.save();
@@ -55,11 +70,11 @@ app.post('/guardar', async function (req, res) {
     res.end("Se ha creado el blog correctamente");
 });
 
-app.get("/editar/:id",async (req,res)=>{
+app.get("/editar/:id", async (req, res) => {
     let datosEditar = await SkemaBlogs.findById(req.params.id);
     res.render('editar', { blogs: datosEditar });
 });
-app.post("/guardarEdicion/:id", async (req,res)=>{
+app.post("/guardarEdicion/:id", async (req, res) => {
     let datosEditar = await SkemaBlogs.findById(req.params.id);
     datosEditar.titulo = req.body.inpTitulo;
     datosEditar.url_imagen = req.body.inpUrl;
@@ -67,13 +82,8 @@ app.post("/guardarEdicion/:id", async (req,res)=>{
     await datosEditar.save();
     res.end("/blogs");
 });
+// function obterPosibleFecha(fecha) {
 
-app.post("/buscar",async(req,res)=>{
-    
-    let buscad = req.body;
-    var busca = await SkemaBlogs.find({titulo:buscad})
-    res.render('blogs',{blogs:busca})
-    console.log(busca)
-});
+// }
 
 app.listen(2000);
