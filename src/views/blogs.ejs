@@ -1,13 +1,14 @@
 <%- include("cabecera.ejs") %>
     <div id="containerBuscar" class="input-group rounded">
-        <input type="search" class="form-control rounded" placeholder="Type to filter" aria-label="Search" aria-describedby="search-addon" />
-        <button id="botonFiltro" class="input-group-text border-0">Bucar</button>
+        <input type="search" class="form-control rounded" placeholder="Type to filter" id="inpBuscador" name="buscador"
+            maxlength="8" />
+        <button id="botonFiltro" class="input-group-text border-0">Buscar</button>
     </div>
 
     <div class="container-fluid">
         <div class="container">
             <div class="text-center mt-5">
-                <h1>Bienvenido a Tus Blogs ;)</h1>
+                <h1>Bienvenido publica Tu Blog ;)</h1>
             </div>
         </div>
     </div>
@@ -17,23 +18,42 @@
             <div>
                 <img src="<%=blogs[i].url_imagen%>" alt="not found">
             </div>
-            <h1 id="titulo"><%=blogs[i].titulo%></h1>
+            <h1 id="titulo">
+                <%=blogs[i].titulo%>
+            </h1>
             <div>
-                <h4 id="descripcion" class="descripcion_blogs"><%=blogs[i].descripcion%></h4>
+                <h4 id="descripcion" class="descripcion_blogs">
+                    <%=blogs[i].descripcion%>
+                </h4>
             </div>
             <div>
-                <a href="/editar/<%=blogs[i]._id%>"><button type="submit" id="editar" name="btnEditar">Editar</button></a>
+                <a href="/editar/<%=blogs[i]._id%>"><button type="submit" id="editar"
+                        name="btnEditar">Editar</button></a>
                 <a href="/vermas/<%=blogs[i]._id%>"> <button>Ver m&aacutes</button> </a>
             </div>
         </div>
-    <% } %>
+        <% } %>
 
-    <script>
-        let todos = document.querySelectorAll(".descripcion_blogs");
-        todos.forEach(ele=>{
-            let des = ele.innerHTML;
-            des = des.substring(0,35)+"...";
-            ele.innerHTML = des;
-        });
-    </script>
-<%- include("piePagina.ejs") %>
+            <script>
+                let todos = document.querySelectorAll(".descripcion_blogs");
+                todos.forEach(ele => {
+                    let des = ele.innerHTML;
+                    des = des.substring(0, 35) + "...";
+                    ele.innerHTML = des;
+                });
+                $(document).ready(() => {
+                    $("#botonFiltro").click((e) => {
+                        e.preventDefault();
+                        $.ajax({
+                            url: '/buscar',
+                            type: 'post',
+                            data:"",
+                            success: (respuesta) => {
+                                location.assign(respuesta);
+                                alert("Tu blog fue editado con exito")
+                            }
+                        });
+                    });
+                });
+            </script>
+            <%- include("piePagina.ejs") %>

@@ -68,4 +68,12 @@ app.post("/guardarEdicion/:id", async (req,res)=>{
     res.end("/blogs");
 });
 
+app.post("/buscar",async(req,res)=>{
+    
+    let buscad = req.body;
+    var busca = await SkemaBlogs.find({titulo:buscad})
+    res.render('blogs',{blogs:busca})
+    console.log(busca)
+});
+
 app.listen(2000);
