@@ -1,9 +1,9 @@
 <%- include("cabecera.ejs") %>
     <form id="editarF" style="width: 70%; margin: auto; text-align: center;">
         <div class="text-center mt-5">
-            <input class="form-control" type="text" placeholder="Titulo" name="inpTitulo" value="<%=blogs.titulo%>">
+            <input class="form-control" type="text" placeholder="Titulo" id="inpTitulo" name="inpTitulo" value="<%=blogs.titulo%>">
             <br>
-            <input class="form-control" type="text" placeholder="Pegue su URL" name="inpUrl" value="<%=blogs.url_imagen%>">
+            <input class="form-control" type="text" placeholder="Pegue su URL" id="inpUrl" name="inpUrl" value="<%=blogs.url_imagen%>">
             <br>
             <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="10" placeholder="descripcion"><%=blogs.descripcion%></textarea>
             <br>
@@ -15,15 +15,19 @@
         $(document).ready(() => {
             $("#btGuardar").click((e) => {
                 e.preventDefault();
-                $.ajax({
-                    url: '/guardarEdicion/<%=blogs._id%>',
-                    type: 'post',
-                    data: $("#editarF").serialize(),
-                    success: (respuesta) => {
-                        alert("Tu blog fue editado con exito");
-                        location.assign(respuesta);
-                    }
-                });
+                if($("#inpTitulo").val().trim() == "" || $("#inpUrl").val().trim() == "" || $("#contenido").val().trim() == ""){
+                    alert("Debe llenar todos los campos");
+                }else{
+                    $.ajax({
+                        url: '/guardarEdicion/<%=blogs._id%>',
+                        type: 'post',
+                        data: $("#editarF").serialize(),
+                        success: (respuesta) => {
+                            alert("Tu blog fue editado con exito");
+                            location.assign(respuesta);
+                        }
+                    });
+                }
             });
         });
     </script>

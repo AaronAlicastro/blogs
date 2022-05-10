@@ -25,14 +25,13 @@ app.get("/blogs", async (req, res) => {
 
 app.get("/blogs/:isFiltro", async (req, res) => {
     let filtro = req.params.isFiltro + "";
-    console.log(req.params.fecha)
-    //let posibleFecha = obterPosibleFecha(req.body.fecha)
     let blog_data = await SkemaBlogs.find({
         $or: [
             { titulo: { $regex: filtro } },
             { descripcion: { $regex: filtro } },
             { url_imagen: filtro },
-            //{fecha:posibleFecha}
+            {fecha: {$in: parseInt(filtro)}},
+            {fecha: {$in: obterPosibleFecha(filtro)}}
         ]
     });
     res.render('blogs', { blogs: blog_data });
@@ -63,8 +62,11 @@ app.get('/crear', async function (req, res) {
 });
 
 app.post('/guardar', async function (req, res) {
-    let blog = req.body;
-    blog.fecha = new Date();
+    let blog = req.body; blog.fecha = [];
+    let fecha = new Date();
+    blog.fecha.push(fecha.getDate());
+    blog.fecha.push(fecha.getMonth() + 1);
+    blog.fecha.push(fecha.getYear() + 1900);
     let doc = new SkemaBlogs(blog);
     await doc.save();
     res.end("Se ha creado el blog correctamente");
@@ -82,8 +84,21 @@ app.post("/guardarEdicion/:id", async (req, res) => {
     await datosEditar.save();
     res.end("/blogs");
 });
-// function obterPosibleFecha(fecha) {
-
-// }
+function obterPosibleFecha(fecha) {
+    fecha = fecha.toLowerCase();
+    if("mes enero" == fecha || "enero" == fecha) return 1;
+    else if("mes febrero" == fecha || "febrero" == fecha) return 2;
+    else if("mes marzo" == fecha || "marzo" == fecha) return 3;
+    else if("mes abril" == fecha || "abril" == fecha) return 4;
+    else if("mes mayo" == fecha || "mayo" == fecha) return 5;
+    else if("mes junio" == fecha || "junio" == fecha) return 6;
+    else if("mes julio" == fecha || "julio" == fecha) return 7;
+    else if("mes agosto" == fecha || "agosto" == fecha) return 8;
+    else if("mes septiembre" == fecha || "septiembre" == fecha) return 9;
+    else if("mes octubre" == fecha || "octubre" == fecha) return 10;
+    else if("mes noviembre" == fecha || "noviembre" == fecha) return 11;
+    else if("mes diciembre" == fecha || "diciembre" == fecha) return 12;
+    else return -1;
+}
 
 app.listen(2000);
