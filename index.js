@@ -81,6 +81,10 @@ app.post("/guardarEdicion/:id", async (req, res) => {
     datosEditar.titulo = req.body.inpTitulo;
     datosEditar.url_imagen = req.body.inpUrl;
     datosEditar.descripcion = req.body.contenido;
+    let fecha = new Date();
+    datosEditar.fecha[0] = fecha.getDate();
+    datosEditar.fecha[1] = (fecha.getMonth() + 1);
+    datosEditar.fecha[2] = (fecha.getYear() + 1900);
     await datosEditar.save();
     res.end("/blogs");
 });
