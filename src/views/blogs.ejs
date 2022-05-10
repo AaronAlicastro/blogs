@@ -1,7 +1,7 @@
 <%- include("cabecera.ejs") %>
     <div id="containerBuscar" class="input-group rounded">
-        <input type="search" class="form-control rounded" placeholder="Type to filter" id="inpBuscador" name="buscador"
-         />
+        <input type="search" class="form-control rounded" placeholder="Type to filter" id="inpBuscador"
+            name="buscador" />
         <button id="botonFiltro" class="input-group-text border-0">Buscar</button>
     </div>
 
@@ -43,7 +43,7 @@
                 });
                 $(document).ready(() => {
                     $("#botonFiltro").click((e) => {
-                        if($("#inpBuscador").val().trim() != "") location.assign("/blogs/" + $("#inpBuscador").val());
+                        if ($("#inpBuscador").val().trim() != "") location.assign("/blogs/" + $("#inpBuscador").val());
                         else alert("Debes ingresar un criterio de búsqueda");
                     });
                 });

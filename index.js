@@ -25,14 +25,12 @@ app.get("/blogs", async (req, res) => {
 
 app.get("/blogs/:isFiltro", async (req, res) => {
     let filtro = req.params.isFiltro + "";
-    console.log(req.params.fecha)
-    //let posibleFecha = obterPosibleFecha(req.body.fecha)
+    console.log(req.params.fecha);
     let blog_data = await SkemaBlogs.find({
         $or: [
             { titulo: { $regex: filtro } },
             { descripcion: { $regex: filtro } },
             { url_imagen: filtro },
-            //{fecha:posibleFecha}
         ]
     });
     res.render('blogs', { blogs: blog_data });
@@ -55,7 +53,7 @@ app.post("/aumentarLike/:id", async (req, res) => {
     let blog_data = await SkemaBlogs.findById(req.params.id);
     blog_data.commentBlog.cantidadLikes += 1;
     await blog_data.save();
-    res.end("lesto");
+    res.end("listo");
 });
 
 app.get('/crear', async function (req, res) {
@@ -74,6 +72,7 @@ app.get("/editar/:id", async (req, res) => {
     let datosEditar = await SkemaBlogs.findById(req.params.id);
     res.render('editar', { blogs: datosEditar });
 });
+
 app.post("/guardarEdicion/:id", async (req, res) => {
     let datosEditar = await SkemaBlogs.findById(req.params.id);
     datosEditar.titulo = req.body.inpTitulo;
@@ -82,8 +81,5 @@ app.post("/guardarEdicion/:id", async (req, res) => {
     await datosEditar.save();
     res.end("/blogs");
 });
-// function obterPosibleFecha(fecha) {
-
-// }
 
 app.listen(2000);
