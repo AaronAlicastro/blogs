@@ -27,9 +27,9 @@
         <h3>A&ntildeade un comentario</h3>
         <form id="formComentario">
             <div class="centarOpciones">
-                <input class="formComentario_opciones" type="text" name="nameUsuario" placeholder="Ingresa tu nombre">
+                <input class="formComentario_opciones" type="text" id="nameUsuario" name="nameUsuario" placeholder="Ingresa tu nombre">
             </div>
-            <textarea class="formComentario_opciones" name="comentario" placeholder="Type your comment"></textarea>
+            <textarea class="formComentario_opciones" id="comentario" name="comentario" placeholder="Type your comment"></textarea>
             <div class="centarOpciones">
                 <button class="formComentario_opciones" type="submit" id="enviarComentario">Enviar</button>
             </div>
@@ -39,15 +39,19 @@
     <script>
         $("#enviarComentario").click(e=>{
             e.preventDefault();
-            $.ajax({
-                url: "/anadirComentario/<%=blogs._id%>",
-                type: "post",
-                data: $("#formComentario").serialize(),
-                success: response=>{
-                    history.go(0);
-                }
-            });
-            $("#formComentario").trigger("reset");
+            if($("#nameUsuario").val().trim() == "" || $("#comentario").val().trim() == ""){
+                alert("Debes llenar ambos campos");
+            }else{
+                $.ajax({
+                    url: "/anadirComentario/<%=blogs._id%>",
+                    type: "post",
+                    data: $("#formComentario").serialize(),
+                    success: response=>{
+                        history.go(0);
+                    }
+                });
+                $("#formComentario").trigger("reset");
+            }
         });
 
         $("#imgLike").click(e=>{

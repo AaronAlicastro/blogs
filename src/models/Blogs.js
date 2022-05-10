@@ -5,7 +5,11 @@ var blog = new Schema ({
     titulo: String,
     url_imagen: String,
     descripcion : String,
-    fecha: Date,
+    fecha: [
+        //dia: Number,
+        //mes: Number,
+        //ano: Number
+    ],
     commentBlog: {
         comments: [
             /*

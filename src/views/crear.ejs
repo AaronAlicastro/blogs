@@ -4,8 +4,8 @@
 <form id="formCrear">
     <h1>Subir Blog</h1>
     <div class="form-outline mb-4">
-      <input type="text" id="form5Example1" class="form-control" placeholder="Ingrese título" name="titulo"/>
-      <label class="form-label" for="form5Example1">Tìtulo</label>
+      <input type="text" id="formTitulo" class="form-control" placeholder="Ingrese título" name="titulo"/>
+      <label class="form-label" for="form5Example1">T&iacutetulo</label>
     </div>
     
     <div class="form-outline mb-4">
@@ -14,8 +14,8 @@
     </div>
 
     <div class="form-outline mb-4">
-        <textarea type="email" id="form5Example2" class="form-control" placeholder="Ingrese descripción de blog" name="descripcion"></textarea>
-        <label class="form-label" for="form5Example2">Descripción</label>
+        <textarea type="email" id="descripcion_D" class="form-control" placeholder="Ingrese descripción de blog" name="descripcion"></textarea>
+        <label class="form-label" for="form5Example2">Descripci&oacuten</label>
       </div>
   
     <button type="submit" class="btn btn-primary btn-block mb-4" name="nuevoBlog" id="crearBlog">Subir entrada</button>
@@ -27,15 +27,19 @@
     $(document).ready(function(){
       $('#crearBlog').click(function(e){
         e.preventDefault();
-        $.ajax({
-          url:'/guardar',
-          type: 'POST',
-          data: $('#formCrear').serialize(),
-          success: function(respuesta){
-            alert(respuesta);
-            $("#formCrear").trigger("reset");
-          }
-        });
+        if($("#formTitulo").val().trim() == "" || $("#urlImage").val().trim() == "" || $("#descripcion_D").val().trim() == ""){
+          alert("Debes llenar todos los campos");
+        }else{
+          $.ajax({
+            url:'/guardar',
+            type: 'POST',
+            data: $('#formCrear').serialize(),
+            success: function(respuesta){
+              alert(respuesta);
+              $("#formCrear").trigger("reset");
+            }
+          });
+        }
       })
     });
   </script>
