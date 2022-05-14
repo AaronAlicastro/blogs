@@ -1,4 +1,8 @@
 <%- include("cabecera.ejs") %>
+    <div id="containerInfoBlog">
+        <h1><%=blogs.categoria%> – <span><%=blogs.fecha[0]%>/<%=blogs.fecha[1]%>/<%=blogs.fecha[2]%></span> </h1>
+        <h4>by <%=blogs.autor%></h4>
+    </div>
     <div id="containerTitleBlog">
         <h1 id="titleBlog"><%=blogs.titulo%></h1>
         <div>
@@ -66,4 +70,3 @@
             $("#formComentario").trigger("reset");
         });
     </script>
-<%- include("piePagina.ejs") %>

@@ -1,52 +1,80 @@
 <%- include("cabecera.ejs") %>
-    <div id="containerBuscar" class="input-group rounded">
-        <input type="search" class="form-control rounded" placeholder="Type to filter" id="inpBuscador" name="buscador"
-         />
-        <button id="botonFiltro" class="input-group-text border-0">Buscar</button>
-    </div>
-
-    <div class="container-fluid">
-        <div class="container">
-            <div class="text-center mt-5">
-                <h1>Bienvenido publica Tu Blog ;)</h1>
+    <form method="post" action="/filtrar" id="formFiltrar">
+        <div class="positionFiltrar">
+            <div class="containerChekBox">
+                <div class="containerChekBox-absulute containerChekBox-absulute1">
+                    <div id="componet-print">
+                        <input class="inputFilter" type="text" name="tipoFiltro" value="Tipo filtro" readonly>
+                        <div>></div>
+                    </div>
+                    <div class="componets componets1">Autor</div>
+                    <div class="componets componets1">Titulo</div>
+                    <div class="componets componets1">Descripcion</div>
+                    <div class="componets componets1">Imagen</div>
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="positionFiltrar">
+            <div class="containerChekBox">
+                <div class="containerChekBox-absulute containerChekBox-absulute2">
+                    <div id="componet-print">
+                        <input class="inputFilter" type="text" name="categoria" value="Categoria" readonly>
+                        <div>></div>
+                    </div>
+                    <% let yaPuesto = [] %>
+                    <% for(let i = 0; i < blogs.length; i++){ %>
+                        <% if(!yaPuesto[blogs[i].categoria]){ %>
+                            <% yaPuesto[blogs[i].categoria] = true %>
+                            <div class="componets componets2"><%=blogs[i].categoria%></div>
+                        <% } %>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="positionFiltrar">
+            <input type="text" placeholder="Type your filter" name="filtro">
+        </div>
+        <div class="positionFiltrar">
+            <button type="submit">Filtrar</button>
+        </div>
+    </form>
 
     <% for(let i=0; i < blogs.length; i++){ %>
         <div class="cartillaBlog">
+            <div style="background-image: url(<%=blogs[i].url_imagen%>);"></div>
             <div>
-                <img src="<%=blogs[i].url_imagen%>" alt="not found">
+                <h1>
+                    <%=blogs[i].titulo%>, 
+                </h1>
+                <h1>
+                    Create by <%=blogs[i].autor%>
+                </h1>
             </div>
-            <h1 id="titulo">
-                <%=blogs[i].titulo%>
-            </h1>
             <div>
                 <h4 id="descripcion" class="descripcion_blogs">
                     <%=blogs[i].descripcion%>
                 </h4>
             </div>
             <div>
-                <a href="/editar/<%=blogs[i]._id%>"><button type="submit" id="editar"
+                <div>
+                    <h1>
+                        Subido el
+                    </h1>
+                    <h1>
+                        <%=blogs[i].fecha[0]%>/<%=blogs[i].fecha[1]%>/<%=blogs[i].fecha[2]%>
+                    </h1>
+                </div>
+                <div>
+                    <a href="/editar/<%=blogs[i]._id%>"><button type="submit" id="editar"
                         name="btnEditar">Editar</button></a>
-                <a href="/vermas/<%=blogs[i]._id%>"> <button>Ver m&aacutes</button> </a>
+                    <a href="/vermas/<%=blogs[i]._id%>"> <button>Ver m&aacutes</button> </a>
+                    <button class="evitarEliminar" name="/eliminar/<%=blogs[i]._id%>">Eliminar</button>
+                </div>
             </div>
-            <h6>Subido el –––– <%=blogs[i].fecha[0]%>/<%=blogs[i].fecha[1]%>/<%=blogs[i].fecha[2]%> ––––</h6>
         </div>
-        <% } %>
+    <% } %>
 
-            <script>
-                let todos = document.querySelectorAll(".descripcion_blogs");
-                todos.forEach(ele => {
-                    let des = ele.innerHTML;
-                    des = des.substring(0, 40) + "...";
-                    ele.innerHTML = des;
-                });
-                $(document).ready(() => {
-                    $("#botonFiltro").click((e) => {
-                        if($("#inpBuscador").val().trim() != "") location.assign("/blogs/" + $("#inpBuscador").val());
-                        else alert("Debes ingresar un criterio de búsqueda");
-                    });
-                });
-            </script>
-            <%- include("piePagina.ejs") %>
+    <script src="/fuente/filter.js"></script>
+</body>
+</html>

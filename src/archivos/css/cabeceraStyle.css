@@ -1,0 +1,81 @@
+*{ margin: 0; padding: 0; }
+#cabecera{
+    display: flex; flex-flow: row wrap; background: #093;
+    margin-bottom: 30px; height: fit-content; padding: 8px 0;
+}.positionCabecera:nth-child(1){
+    display: flex; flex-flow: column wrap; justify-content: center;
+    flex-grow: 10; height: fit-content;
+}.positionCabecera:nth-child(1) img{
+    width: 80px; background: none; margin: 0 auto; border-radius: 100%;
+}
+.positionCabecera:nth-child(2){
+    flex-grow: 90; display: flex; flex-flow: row wrap; justify-content: center; height: fit-content;
+    box-sizing: border-box;
+}.positionCabecera:nth-child(2) input, button{
+    height: 40px; margin: 20px 0; 
+}.positionCabecera:nth-child(2) input{
+    flex-grow: 100; border: none; border-top-left-radius: 12px; border-bottom-left-radius: 12px;
+    background: linear-gradient(to right, #093, #092); padding-left: 15px;
+    border-style: none; outline: none; color: #fff;
+}.positionCabecera:nth-child(2) input::placeholder{
+    color: #fff;
+}.positionCabecera:nth-child(2) input:hover{
+    cursor: pointer; outline: 1px solid #fff;
+}.positionCabecera:nth-child(2) input:focus{
+    transition: all 10s;   background: linear-gradient(to left, #093, #0a2);
+}.positionCabecera:nth-child(2) button{
+    flex-grow: 7; border: none; border-top-right-radius: 12px; border-bottom-right-radius: 12px;
+    background: #fff; color: #000; outline: 1px solid #fff;
+}.positionCabecera:nth-child(2) button:hover{
+    font-family: 'Allura', cursive; font-size: 20px; cursor: pointer;
+}
+.positionCabecera:nth-child(3){
+    display: flex; flex-flow: column wrap; justify-content: center;
+    flex-grow: 7; height: fit-content; box-sizing: border-box;
+}.positionCabecera:nth-child(3) a{
+    margin: 0; margin-left: 20px; text-decoration: none;
+}.positionCabecera:nth-child(3) a button{
+    margin: 0; width: 70%; background: none; border: none; color: #fff;
+}.positionCabecera:nth-child(3) a button:hover{
+    background: #0c0; border-radius: 20px; cursor: pointer;
+}/* parte de filtrar–––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+#formFiltrar{
+    display: flex; flex-flow: row wrap;
+}.positionFiltrar:nth-child(1){
+    display: flex; flex-flow: column wrap; justify-content: center;
+    flex-grow: 15; padding: 0 20px; box-sizing: border-box;
+}.containerChekBox{
+    position: relative; width: fit-content; height: fit-content; margin: 0 auto;
+    width: 100%; height: fit-content; background: pink; padding: 0;
+}#componet-print{
+    display: flex; flex-flow: row wrap;
+}#componet-print input{
+    width: 70%; height: 30px; background: none; border: none; padding: 10px;
+    border-style: none; outline: none; color: #000;
+}#componet-print div{
+    flex-grow: 15; text-align: center; font-size: 25px; box-sizing: border-box; font-weight: bold;
+    display: flex; flex-flow: column wrap; justify-content: center; color: #000;
+}.containerChekBox-absulute{
+    position: absolute; width: fit-content; height: fit-content; background: none;
+    background: #093; top: -20px; border-radius: 12px;
+}.containerChekBox-absulute:hover, #componet-print input{
+    cursor: pointer;
+}.componets{
+    display: none; padding: 10px 5px; border-left: 1px solid #fff;
+}.componets:hover{
+    background: #0c0; border-radius: 20px; cursor: pointer;
+}.positionFiltrar:nth-child(2){
+    display: flex; flex-flow: column wrap; justify-content: center;
+    flex-grow: 15; padding: 20px; box-sizing: border-box;
+}.positionFiltrar:nth-child(3){
+    display: flex; flex-flow: column wrap; justify-content: center;
+    flex-grow: 50;
+}.positionFiltrar:nth-child(3) input{
+    height: 45px; background: none; border: none; box-shadow: -2px 2px 1px 1px #aaa;
+    border-style: none; outline: none; border-top-left-radius: 12px; border-bottom-left-radius: 12px;
+}.positionFiltrar:nth-child(4){
+    flex-grow: 5;
+}.positionFiltrar:nth-child(4) button{
+    height: 45px; border: none; background: #006; color: #fff;
+    padding: 0 15px; border-top-right-radius: 12px; border-bottom-right-radius: 12px;
+}
