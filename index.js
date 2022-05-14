@@ -58,7 +58,7 @@ app.post("/aumentarLike/:id", async (req, res) => {
     let blog_data = await SkemaBlogs.findById(req.params.id);
     blog_data.commentBlog.cantidadLikes += 1;
     await blog_data.save();
-    res.end("lesto");
+    res.end("listo");
 });
 
 app.get('/crear', async function (req, res) {
@@ -86,6 +86,7 @@ app.get("/editar/:id", async (req, res) => {
     let datosEditar = await SkemaBlogs.findById(req.params.id);
     res.render('editar', { blogs: datosEditar });
 });
+
 app.post("/guardarEdicion/:id", async (req, res) => {
     let datosEditar = await SkemaBlogs.findById(req.params.id);
     datosEditar.autor = req.body.autor;

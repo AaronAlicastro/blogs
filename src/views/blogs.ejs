@@ -1,4 +1,5 @@
 <%- include("cabecera.ejs") %>
+<<<<<<< HEAD
     <form method="post" action="/filtrar" id="formFiltrar">
         <div class="positionFiltrar">
             <div class="containerChekBox">
@@ -14,6 +15,13 @@
                 </div>
             </div>
         </div>
+=======
+    <div id="containerBuscar" class="input-group rounded">
+        <input type="search" class="form-control rounded" placeholder="Type to filter" id="inpBuscador"
+            name="buscador" />
+        <button id="botonFiltro" class="input-group-text border-0">Buscar</button>
+    </div>
+>>>>>>> d058c1bac3464c387de6c542f6548f6f38669679
 
         <div class="positionFiltrar">
             <div class="containerChekBox">
@@ -75,6 +83,24 @@
         </div>
     <% } %>
 
+<<<<<<< HEAD
     <script src="/fuente/filter.js"></script>
 </body>
 </html>
+=======
+            <script>
+                let todos = document.querySelectorAll(".descripcion_blogs");
+                todos.forEach(ele => {
+                    let des = ele.innerHTML;
+                    des = des.substring(0, 40) + "...";
+                    ele.innerHTML = des;
+                });
+                $(document).ready(() => {
+                    $("#botonFiltro").click((e) => {
+                        if ($("#inpBuscador").val().trim() != "") location.assign("/blogs/" + $("#inpBuscador").val());
+                        else alert("Debes ingresar un criterio de búsqueda");
+                    });
+                });
+            </script>
+            <%- include("piePagina.ejs") %>
+>>>>>>> d058c1bac3464c387de6c542f6548f6f38669679
