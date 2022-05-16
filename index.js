@@ -5,6 +5,7 @@ const ejs = require("ejs");
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/src/archivos"));
 app.set("views", __dirname + "/src/views");
 app.set("view engine", "ejs");
 
@@ -17,24 +18,27 @@ mongoose.connect(
 });
 
 const SkemaBlogs = require("./src/models/Blogs");
+const { redirect } = require("express/lib/response");
 
 app.get("/blogs", async (req, res) => {
     let datos_blogs = await SkemaBlogs.find();
     res.render('blogs', { blogs: datos_blogs });
 });
 
-app.get("/blogs/:isFiltro", async (req, res) => {
-    let filtro = req.params.isFiltro + "";
-    let blog_data = await SkemaBlogs.find({
+app.post("/filtrar", async (req,res)=>{
+    //console.log(req.body)
+});
+app.post("/buscar", async (req,res)=>{
+    let filtro = req.body.busqueda + "";
+    let blog_data = await SkemaBlogs.findOne({
         $or: [
             { titulo: { $regex: filtro } },
             { descripcion: { $regex: filtro } },
-            { url_imagen: filtro },
-            {fecha: {$in: parseInt(filtro)}},
-            {fecha: {$in: obterPosibleFecha(filtro)}}
+            { categoria: { $regex: filtro } },
+            { url_imagen: filtro }
         ]
     });
-    res.render('blogs', { blogs: blog_data });
+    res.render('verMas', { blogs: blog_data });
 });
 
 app.get("/verMas/:id", async (req, res) => {
@@ -58,9 +62,11 @@ app.post("/aumentarLike/:id", async (req, res) => {
 });
 
 app.get('/crear', async function (req, res) {
-    res.render('crear', {});
+    res.render('crear', { message:{
+            send: false,
+        }
+    });
 });
-
 app.post('/guardar', async function (req, res) {
     let blog = req.body; blog.fecha = [];
     let fecha = new Date();
@@ -69,7 +75,11 @@ app.post('/guardar', async function (req, res) {
     blog.fecha.push(fecha.getYear() + 1900);
     let doc = new SkemaBlogs(blog);
     await doc.save();
-    res.end("Se ha creado el blog correctamente");
+    res.render("crear",{ message:{
+            send: true,
+            value: "Se ha creado el blog correctamente"
+        }
+    });
 });
 
 app.get("/editar/:id", async (req, res) => {
@@ -79,31 +89,26 @@ app.get("/editar/:id", async (req, res) => {
 
 app.post("/guardarEdicion/:id", async (req, res) => {
     let datosEditar = await SkemaBlogs.findById(req.params.id);
-    datosEditar.titulo = req.body.inpTitulo;
-    datosEditar.url_imagen = req.body.inpUrl;
-    datosEditar.descripcion = req.body.contenido;
+    datosEditar.autor = req.body.autor;
+    datosEditar.categoria = req.body.categoria;
+    datosEditar.titulo = req.body.titulo;
+    datosEditar.url_imagen = req.body.url_imagen;
+    datosEditar.descripcion = req.body.descripcion;
     let fecha = new Date();
     datosEditar.fecha[0] = fecha.getDate();
     datosEditar.fecha[1] = (fecha.getMonth() + 1);
     datosEditar.fecha[2] = (fecha.getYear() + 1900);
     await datosEditar.save();
-    res.end("/blogs");
+    res.redirect("/blogs");
 });
-function obterPosibleFecha(fecha) {
-    fecha = fecha.toLowerCase();
-    if("mes enero" == fecha || "enero" == fecha) return 1;
-    else if("mes febrero" == fecha || "febrero" == fecha) return 2;
-    else if("mes marzo" == fecha || "marzo" == fecha) return 3;
-    else if("mes abril" == fecha || "abril" == fecha) return 4;
-    else if("mes mayo" == fecha || "mayo" == fecha) return 5;
-    else if("mes junio" == fecha || "junio" == fecha) return 6;
-    else if("mes julio" == fecha || "julio" == fecha) return 7;
-    else if("mes agosto" == fecha || "agosto" == fecha) return 8;
-    else if("mes septiembre" == fecha || "septiembre" == fecha) return 9;
-    else if("mes octubre" == fecha || "octubre" == fecha) return 10;
-    else if("mes noviembre" == fecha || "noviembre" == fecha) return 11;
-    else if("mes diciembre" == fecha || "diciembre" == fecha) return 12;
-    else return -1;
+app.get("/eliminar/:id", async (req,res)=>{
+    let blog = await SkemaBlogs.findById(req.params.id);
+    await blog.remove();
+    res.redirect("/blogs");
+});
+
+function realizarFiltro(fecha) {
+    
 }
 
 app.listen(2000);

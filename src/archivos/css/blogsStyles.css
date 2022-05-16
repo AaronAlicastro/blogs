@@ -1,0 +1,36 @@
+.cartillaBlog{
+    display: flex; flex-flow: column wrap; justify-content: space-evenly;
+    background: #006; width: 600px; height: 450px; border-radius: 12px;
+    margin: 50px 25px; box-shadow: 4px 1px 2px 2px #6f73ff; display: inline-block;
+}.cartillaBlog h1{
+    text-align: center; font-size: 25px; color: #fff; border-radius: 12px;
+}#descripcion{
+    font-size: 20px; color: #dde;
+}img{ object-fit: cover; }
+.cartillaBlog div:nth-child(1){
+    height: 50%; border-radius: 12px;
+}.cartillaBlog div:nth-child(2){
+    display: flex; flex-flow: column wrap; margin-bottom: 20px; padding-left: 15px;
+}.cartillaBlog div:nth-child(2) h1:nth-child(1){
+    flex-grow: 1; text-align: left;
+}.cartillaBlog div:nth-child(2) h1:nth-child(2){
+    flex-grow: 1; text-align: left;
+}.cartillaBlog div:nth-child(3){
+    flex-grow: 15; padding: 0 15px; box-sizing: border-box;
+}.cartillaBlog div:nth-child(4){
+    display: flex; flex-flow: row wrap; flex-grow: 1; box-sizing: border-box;
+}.cartillaBlog div:nth-child(4) div{
+    display: inline-block; flex-grow: 50; padding: 10px; 
+    height: 15vh; display: flex; flex-flow: column wrap; justify-content: center;
+}.cartillaBlog div:nth-child(4) div h1{
+    text-align: left; color: #aaa;
+}.cartillaBlog div:nth-child(4) div:nth-child(2){
+    flex-grow: 43;
+}.cartillaBlog div:nth-child(4) div:nth-child(2) div{
+    width: fit-content; height: fit-content;
+}.cartillaBlog div:nth-child(4) div button{
+    width: 80px; height: 50px; margin: 20px 0; color: #fff;
+    opacity: .5; background: #209; border: none; border-radius: 10px;
+}.cartillaBlog div:nth-child(4) div button:hover{
+    transform: scale(1.1,1.1); cursor: pointer; outline: 1px solid #fff;
+}
