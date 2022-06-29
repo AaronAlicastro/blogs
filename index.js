@@ -26,7 +26,32 @@ app.get("/blogs", async (req, res) => {
 });
 
 app.post("/filtrar", async (req,res)=>{
-    //console.log(req.body)
+    let tipoFiltro = req.body.tipoFiltro.toLowerCase().trim();
+    let datos_blogs = [];
+    if(tipoFiltro == "autor"){
+        datos_blogs = await SkemaBlogs.find({$or:[
+            {autor: { $regex: req.body.filtro }},
+            {categoria: req.body.categoria}
+        ]});
+    }else if(tipoFiltro == "titulo"){
+        datos_blogs = await SkemaBlogs.find({$or:[
+            {titulo: { $regex: req.body.filtro }},
+            {categoria: req.body.categoria}
+        ]});
+    }else if(tipoFiltro == "descripcion"){
+        datos_blogs = await SkemaBlogs.find({$or:[
+            {descripcion: { $regex: req.body.filtro }},
+            {categoria: req.body.categoria}
+        ]});
+    }else if(tipoFiltro == "imagen"){
+        datos_blogs = await SkemaBlogs.find({$or:[
+            {descripcion: { $regex: req.body.filtro }},
+            {categoria: req.body.categoria}
+        ]});
+    }else{
+        datos_blogs = await SkemaBlogs.find({ categoria: req.body.categoria });
+    }
+    res.render('blogs', { blogs: datos_blogs });
 });
 app.post("/buscar", async (req,res)=>{
     let filtro = req.body.busqueda + "";
@@ -106,9 +131,5 @@ app.get("/eliminar/:id", async (req,res)=>{
     await blog.remove();
     res.redirect("/blogs");
 });
-
-function realizarFiltro(fecha) {
-    
-}
 
 app.listen(2000);
